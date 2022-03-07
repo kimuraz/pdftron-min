@@ -19,7 +19,7 @@
         template: `<div ref="viewer"></div>`,
         mounted() {
           this.$nextTick(() => {
-            WebViewer(
+            const p = WebViewer(
               {
                 path: '/webviewer',
                 licenseKey: 'testing_key',
@@ -36,6 +36,7 @@
               .finally(() => {
                 console.log("Finished on Iframe");
               });
+              console.log('Promise iframe:', p);
           });
         },
       });

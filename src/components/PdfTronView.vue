@@ -7,7 +7,8 @@ import WebViewer from "@pdftron/webviewer";
 export default {
   mounted() {
     this.$nextTick(() => {
-      WebViewer(
+      // eslint-disable-next-line
+      const p = WebViewer(
         {
           path: `${process.env.BASE_URL}webviewer`,
           licenseKey: 'testing_key',
@@ -24,6 +25,7 @@ export default {
         .finally(() => {
           console.log("Finished");
         });
+      console.log('Promise:', p);
     });
   },
 };
