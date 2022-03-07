@@ -1,19 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <button @click="ready = true">Start</button>
+      <button @click="showIframe = true">Iframe</button>
+    </div>
+    <PdfTronView v-if="ready"/>
+
+    <iframe id="pdftron-nested" width="100%" height="100%" v-if="showIframe" src="/pdftron_iframe.html"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PdfTronView from "./components/PdfTronView";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    PdfTronView,
+  },
+  data() {
+    return {
+      ready: false,
+      showIframe: false,
+    };
+  },
+};
 </script>
 
 <style>

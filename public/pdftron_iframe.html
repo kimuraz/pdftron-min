@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src='/webviewer/webviewer.min.js'></script>
+
+    <script>
+      new Vue({
+        el: "#app",
+        template: `<div ref="viewer"></div>`,
+        mounted() {
+          this.$nextTick(() => {
+            WebViewer(
+              {
+                path: '/webviewer',
+                licenseKey: 'testing_key',
+                initialDoc: "/pdf/sample.pdf",
+              },
+              this.$refs.viewer
+            )
+              .then((instance) => {
+                console.log("LOADED on Iframe", instance);
+              })
+              .catch((err) => {
+                console.error("Err on Iframe", err);
+              })
+              .finally(() => {
+                console.log("Finished on Iframe");
+              });
+          });
+        },
+      });
+    </script>
+  </body>
+</html>
